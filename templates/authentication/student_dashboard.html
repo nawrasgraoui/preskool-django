@@ -1,0 +1,16 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="page-header">
+    <h3 class="page-title">Student Dashboard</h3>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h4>Bienvenue {{ request.user.first_name }}</h4>
+        <a href="{% url 'logout' %}" class="btn btn-danger mt-3">Logout</a>
+    </div>
+</div>
+
+{% endblock %}

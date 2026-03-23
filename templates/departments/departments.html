@@ -1,0 +1,59 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="page-title">Departments List</h3>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <a href="{% url 'add_department' %}" class="btn btn-primary mb-3">Add Department</a>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Head of Department</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for department in departments %}
+                    <tr>
+                        <td>{{ department.name }}</td>
+                        <td>
+                            {% if department.department_head %}
+                                {{ department.department_head.first_name }} {{ department.department_head.last_name }}
+                            {% else %}
+                                None
+                            {% endif %}
+                        </td>
+                        <td>{{ department.description }}</td>
+                        <td>
+                            <a href="{% url 'department_details' department.id %}">View</a>
+                            <a href="{% url 'edit_department' department.id %}">Edit</a>
+
+                            <form action="{% url 'delete_department' department.id %}" method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4">No departments found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

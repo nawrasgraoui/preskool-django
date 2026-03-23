@@ -1,0 +1,26 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="page-title">Teacher Details</h3>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <p><strong>First Name:</strong> {{ teacher.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ teacher.last_name }}</p>
+        <p><strong>Teacher ID:</strong> {{ teacher.teacher_id }}</p>
+        <p><strong>Email:</strong> {{ teacher.email }}</p>
+        <p><strong>Phone:</strong> {{ teacher.phone }}</p>
+        <p><strong>Qualification:</strong> {{ teacher.qualification }}</p>
+        <p><strong>Address:</strong> {{ teacher.address }}</p>
+
+        <a href="{% url 'teacher_list' %}" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+{% endblock %}

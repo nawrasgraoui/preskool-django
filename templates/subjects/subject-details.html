@@ -1,0 +1,33 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="page-title">Subject Details</h3>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <p><strong>Name:</strong> {{ subject.name }}</p>
+        <p><strong>Code:</strong> {{ subject.code }}</p>
+        <p><strong>Department:</strong> {{ subject.department.name }}</p>
+
+        <p>
+            <strong>Teacher:</strong>
+            {% if subject.teacher %}
+                {{ subject.teacher.first_name }} {{ subject.teacher.last_name }}
+            {% else %}
+                None
+            {% endif %}
+        </p>
+
+        <p><strong>Description:</strong> {{ subject.description }}</p>
+
+        <a href="{% url 'subject_list' %}" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+{% endblock %}

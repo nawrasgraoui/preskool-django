@@ -1,0 +1,31 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="page-title">Department Details</h3>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <p><strong>Name:</strong> {{ department.name }}</p>
+
+        <p>
+            <strong>Head of Department:</strong>
+            {% if department.department_head %}
+                {{ department.department_head.first_name }} {{ department.department_head.last_name }}
+            {% else %}
+                None
+            {% endif %}
+        </p>
+
+        <p><strong>Description:</strong> {{ department.description }}</p>
+
+        <a href="{% url 'department_list' %}" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+{% endblock %}

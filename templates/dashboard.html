@@ -1,0 +1,117 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        <!-- Header -->
+        <div class="page-header">
+            <h3 class="page-title">Welcome Admin!</h3>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ul>
+        </div>
+
+        <!-- Cards -->
+        <div class="row">
+
+            <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                <div class="card bg-one w-100">
+                    <div class="card-body text-center">
+                        <h3>50055</h3>
+                        <h6>Students</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                <div class="card bg-two w-100">
+                    <div class="card-body text-center">
+                        <h3>50+</h3>
+                        <h6>Awards</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                <div class="card bg-three w-100">
+                    <div class="card-body text-center">
+                        <h3>30+</h3>
+                        <h6>Departments</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-sm-6 col-12 d-flex">
+                <div class="card bg-four w-100">
+                    <div class="card-body text-center">
+                        <h3>$505</h3>
+                        <h6>Revenue</h6>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Graphs -->
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Revenue</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Number of Students</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="studentChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Charts JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctx1 = document.getElementById('revenueChart');
+new Chart(ctx1, {
+    type: 'line',
+    data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        datasets: [{
+            label: 'Revenue',
+            data: [10, 20, 30, 25, 40],
+        }]
+    }
+});
+
+const ctx2 = document.getElementById('studentChart');
+new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        datasets: [{
+            label: 'Students',
+            data: [50, 60, 70, 65, 80],
+        }]
+    }
+});
+</script>
+
+{% endblock %}

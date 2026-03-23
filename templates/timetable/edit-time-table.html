@@ -1,0 +1,79 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="page-title">Edit Time Table</h3>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Subject</label>
+                <select name="subject" class="form-control">
+                    {% for subject in subjects %}
+                        <option value="{{ subject.id }}"
+                            {% if timetable.subject.id == subject.id %}selected{% endif %}>
+                            {{ subject.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Teacher</label>
+                <select name="teacher" class="form-control">
+                    <option value="">Select Teacher</option>
+                    {% for teacher in teachers %}
+                        <option value="{{ teacher.id }}"
+                            {% if timetable.teacher and timetable.teacher.id == teacher.id %}selected{% endif %}>
+                            {{ teacher.first_name }} {{ teacher.last_name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Day</label>
+                <select name="day" class="form-control">
+                    <option value="Monday" {% if timetable.day == 'Monday' %}selected{% endif %}>Monday</option>
+                    <option value="Tuesday" {% if timetable.day == 'Tuesday' %}selected{% endif %}>Tuesday</option>
+                    <option value="Wednesday" {% if timetable.day == 'Wednesday' %}selected{% endif %}>Wednesday</option>
+                    <option value="Thursday" {% if timetable.day == 'Thursday' %}selected{% endif %}>Thursday</option>
+                    <option value="Friday" {% if timetable.day == 'Friday' %}selected{% endif %}>Friday</option>
+                    <option value="Saturday" {% if timetable.day == 'Saturday' %}selected{% endif %}>Saturday</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Start Time</label>
+                <input type="time" name="start_time" value="{{ timetable.start_time|time:'H:i' }}" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>End Time</label>
+                <input type="time" name="end_time" value="{{ timetable.end_time|time:'H:i' }}" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Room</label>
+                <input type="text" name="room" value="{{ timetable.room }}" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" class="form-control">{{ timetable.description }}</textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

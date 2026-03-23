@@ -1,0 +1,68 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="page-title">Edit Subject</h3>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Subject Name</label>
+                <input type="text" name="name" value="{{ subject.name }}" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Subject Code</label>
+                <input type="text" name="code" value="{{ subject.code }}" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Department</label>
+                <select name="department" class="form-control">
+                    {% for department in departments %}
+                        <option value="{{ department.id }}"
+                            {% if subject.department.id == department.id %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ department.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Teacher</label>
+                <select name="teacher" class="form-control">
+                    <option value="">Select Teacher</option>
+                    {% for teacher in teachers %}
+                        <option value="{{ teacher.id }}"
+                            {% if subject.teacher and subject.teacher.id == teacher.id %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ teacher.first_name }} {{ teacher.last_name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" class="form-control">{{ subject.description }}</textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
