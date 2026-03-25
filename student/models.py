@@ -31,8 +31,8 @@ class Student(models.Model):
     joining_date = models.DateField()
     mobile_number = models.CharField(max_length=15)
     admission_number = models.CharField(max_length=20)
-    section = models.CharField(max_length=10)
-    student_image = models.ImageField(upload_to='students/', blank=True)
+    section = models.CharField(max_length=10, blank=True,null=True)
+    student_image = models.ImageField(upload_to='students/', blank=True,null=True)
     parent = models.OneToOneField(Parent, on_delete=models.CASCADE)
 
     def __str__(self):

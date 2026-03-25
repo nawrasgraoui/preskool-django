@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from .models import Student, Parent
@@ -110,4 +111,7 @@ def view_student(request, student_id):
     return render(request, 'students/student-details.html')
 
 def delete_student(request, student_id):
+    if request.method == "POST":
+        student = get_object_or_404(Student, id=student_id)
+        student.delete()
     return redirect('student_list')
